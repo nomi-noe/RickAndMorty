@@ -42,5 +42,7 @@
     </div>
   </div>
   <button class="btn btn-primary btn-sm" (click)="linkSearchCharacterService.search()">Search</button>
-
+  <div *ngIf="linkSearchCharacterService.errorMessage !== null">
+    <p>{{ linkSearchCharacterService.errorMessage }}</p>
+  </div>
 </ul>

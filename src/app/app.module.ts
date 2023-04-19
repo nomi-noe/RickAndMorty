@@ -12,11 +12,11 @@ import { CharacterSearchComponent } from './character-search/character-search.co
 import { CharactersComponent } from './characters/characters.component';
 import { EpisodeDetailComponent } from './episode-detail/episode-detail.component';
 import { EpisodeListItemComponent } from './episode-list-item/episode-list-item.component';
+import { EpisodeSearchComponent } from './episode-search/episode-search.component';
 import { EpisodesComponent } from './episodes/episodes.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { RickAndMortyService } from './services/rick-and-morty.service';
-import { EpisodeSearchComponent } from './episode-search/episode-search.component';
 
 @NgModule({
   declarations: [
