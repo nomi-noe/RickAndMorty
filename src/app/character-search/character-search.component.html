@@ -1,16 +1,46 @@
-<ul>NAME:
-  <input class="rounded" type="text" [(ngModel)]="linkSearchCharacterService.searchTermName">
+<ul class=" navbar navbar-expand-lg">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group mx-1">
+        <input class="form-control rounded" type="text" placeholder="enter a name"
+          [(ngModel)]="linkSearchCharacterService.searchTermName">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group mx-1">
+        <input class="form-control rounded" type="text" placeholder="enter a species"
+          [(ngModel)]="linkSearchCharacterService.searchTermSpecies">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group mx-1">
+        <input class="form-control rounded" type="text" placeholder="enter a type"
+          [(ngModel)]="linkSearchCharacterService.searchTermType">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group mx-1">
+        <select class=" custom-select rounded" [(ngModel)]="linkSearchCharacterService.searchTermStatus">
+          <option *ngFor="let status of listStatus" [value]="status">{{status | uppercase}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group mx-1">
+        <select class="rounded" [(ngModel)]="linkSearchCharacterService.searchTermGender">
+          <option *ngFor="let gender of genders" [value]="gender">{{gender | uppercase}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-primary btn-sm" (click)="linkSearchCharacterService.search()">Search</button>
 
-  <br>SPECIES: <input class="rounded" type="text" [(ngModel)]="linkSearchCharacterService.searchTermSpecies">
-
-  <br>TYPE: <input class="rounded" type="text" [(ngModel)]="linkSearchCharacterService.searchTermType">
-
-  <br>STATUS: <select class="rounded mt-1" [(ngModel)]="linkSearchCharacterService.searchTermStatus">
-    <option value="">ALL</option>
-    <option *ngFor="let status of listStatus" [value]="status">{{status | uppercase}}</option>
-  </select>
-  <br>GENDER: <select class="rounded mt-1" [(ngModel)]="linkSearchCharacterService.searchTermGender">
-    <option *ngFor="let gender of genders" [value]="gender">{{gender | uppercase}}</option>
-  </select>
-  <br><button class="rounded pr-1 mt-1" (click)="linkSearchCharacterService.search()">Search</button>
 </ul>

@@ -9,7 +9,7 @@ import { RickAndMortyService } from '../services/rick-and-morty.service';
 })
 
 export class CharacterSearchComponent {
-  listStatus = ['alive', 'dead', 'unknown']
+  listStatus = ['all', 'alive', 'dead', 'unknown']
   genders = ['female', 'male', 'genderless', 'unknown']
 
   constructor(public linkSearchCharacterService: LinkSearchCharactersService, public rickAndMortyService: RickAndMortyService) { }
