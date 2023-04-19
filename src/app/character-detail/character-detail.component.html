@@ -1,10 +1,29 @@
 <div *ngIf="character">
-  <h2>{{ character.name }}</h2>
-  <p><strong>Status:</strong> {{ character.status }}</p>
-  <p><strong>Species:</strong> {{ character.species }}</p>
-  <p><strong>Type:</strong> {{ character.type }}</p>
-  <p><strong>Gender:</strong> {{ character.gender }}</p>
-  <p><strong>Origin:</strong> {{ character.origin.name }}</p>
-  <p><strong>Location:</strong> {{ character.location.name }}</p>
-  <img src="{{ character.image }}" alt="{{ character.name }}'s image">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Species</th>
+        <th>Type</th>
+        <th>Gender</th>
+        <th>Origin</th>
+        <th>Location</th>
+        <th>Picture</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{character.name}}</td>
+        <td>{{character.status}}</td>
+        <td>{{character.species}}</td>
+        <td>{{character.type}}</td>
+        <td>{{character.gender}}</td>
+        <td>{{character.origin.name}}</td>
+        <td>{{character.location.name}}</td>
+        <td><img src="{{ character.image }}" alt="{{ character.name }}'s image"></td>
+      </tr>
+
+    </tbody>
+  </table>
 </div>
