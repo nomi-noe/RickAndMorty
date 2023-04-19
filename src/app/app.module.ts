@@ -10,9 +10,13 @@ import { CharacterDetailComponent } from './character-detail/character-detail.co
 import { CharacterListItemComponent } from './character-list-item/character-list-item.component';
 import { CharacterSearchComponent } from './character-search/character-search.component';
 import { CharactersComponent } from './characters/characters.component';
+import { EpisodeDetailComponent } from './episode-detail/episode-detail.component';
+import { EpisodeListItemComponent } from './episode-list-item/episode-list-item.component';
+import { EpisodesComponent } from './episodes/episodes.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { RickAndMortyService } from './services/rick-and-morty.service';
+import { EpisodeSearchComponent } from './episode-search/episode-search.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,11 @@ import { RickAndMortyService } from './services/rick-and-morty.service';
     HeaderComponent,
     FooterComponent,
     CharacterDetailComponent,
-    CharacterSearchComponent
+    CharacterSearchComponent,
+    EpisodesComponent,
+    EpisodeDetailComponent,
+    EpisodeListItemComponent,
+    EpisodeSearchComponent
 
   ],
   imports: [
@@ -32,7 +40,7 @@ import { RickAndMortyService } from './services/rick-and-morty.service';
     HttpClientModule,
     FormsModule
   ],
-  providers: [CharactersComponent, RickAndMortyService],
+  providers: [CharactersComponent, RickAndMortyService, EpisodesComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

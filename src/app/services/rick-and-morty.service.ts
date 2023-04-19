@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Character } from '../models/character';
 import { CharacterResult } from '../models/character-result';
+import { Episode } from '../models/episode';
+import { EpisodeResult } from '../models/episode-result';
 
 
 @Injectable({ providedIn: 'root' })
@@ -29,6 +31,20 @@ export class RickAndMortyService {
 
   searchCharacters(name: string, status: string, gender: string, species: string, type: string) {
     return this.http.get<CharacterResult>(`${this.apiUrl}/character/?name=${name}&status=${status}&gender=${gender}&species=${species}&type=${type}`);
+  }
+
+
+  getEpisodes(): Observable<EpisodeResult> {
+    return this.http.get<EpisodeResult>(`${this.apiUrl}/episode`);
+  }
+
+  getEpisode(id: string): Observable<Episode> {
+    const url = `${this.apiUrl}/episode/${id}`;
+    return this.http.get<Episode>(url).pipe();
+  }
+
+  searchEpisodes(name: string, episode: string) {
+    return this.http.get<EpisodeResult>(`${this.apiUrl}/episode/?name=${name}&episode=${episode}`);
   }
 
   // searchCharacters(name: string): Observable<CharacterResult> {
