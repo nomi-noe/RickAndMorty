@@ -32,14 +32,14 @@ export class LinkSearchCharactersService {
       .pipe(
         catchError(error => {
           console.log('Erreur:', error);
-          this.errorMessage = 'Aucun résultat correspondant';
+          this.errorMessage = 'Aucun résultat correspondant.';
           return of();
         })
       )
       .subscribe(results => {
         this.characters = results.results;
         if (this.characters.length === 0) {
-          console.log('Aucun Character trouvé');
+          console.log('Aucun Character trouvé.');
         } else {
           this.errorMessage = '';
         }
