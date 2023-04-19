@@ -1,0 +1,12 @@
+<ul>NAME:
+  <input class="rounded" type="text" [(ngModel)]="linkSearchCharacterService.searchTermName">
+
+  <br>STATUS: <select class="rounded mt-1" [(ngModel)]="linkSearchCharacterService.searchTermStatus">
+    <option value="">ALL</option>
+    <option *ngFor="let status of listStatus" [value]="status">{{status | uppercase}}</option>
+  </select>
+  <br>GENDER: <select class="rounded mt-1" [(ngModel)]="linkSearchCharacterService.searchTermGender">
+    <option *ngFor="let gender of genders" [value]="gender">{{gender | uppercase}}</option>
+  </select>
+  <br><button class="rounded pr-1 mt-1" (click)="linkSearchCharacterService.search()">Search</button>
+</ul>
