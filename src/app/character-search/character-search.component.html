@@ -1,6 +1,10 @@
 <ul>NAME:
   <input class="rounded" type="text" [(ngModel)]="linkSearchCharacterService.searchTermName">
 
+  <br>SPECIES: <input class="rounded" type="text" [(ngModel)]="linkSearchCharacterService.searchTermSpecies">
+
+  <br>TYPE: <input class="rounded" type="text" [(ngModel)]="linkSearchCharacterService.searchTermType">
+
   <br>STATUS: <select class="rounded mt-1" [(ngModel)]="linkSearchCharacterService.searchTermStatus">
     <option value="">ALL</option>
     <option *ngFor="let status of listStatus" [value]="status">{{status | uppercase}}</option>

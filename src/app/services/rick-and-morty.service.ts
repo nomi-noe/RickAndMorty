@@ -27,8 +27,8 @@ export class RickAndMortyService {
     return this.http.get<Character>(url).pipe();
   }
 
-  searchCharacters(name: string, status: string, gender: string) {
-    return this.http.get<CharacterResult>(`${this.apiUrl}/character/?name=${name}&status=${status}&gender=${gender}`);
+  searchCharacters(name: string, status: string, gender: string, species: string, type: string) {
+    return this.http.get<CharacterResult>(`${this.apiUrl}/character/?name=${name}&status=${status}&gender=${gender}&species=${species}&type=${type}`);
   }
 
   // searchCharacters(name: string): Observable<CharacterResult> {

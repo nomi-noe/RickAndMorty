@@ -9,6 +9,8 @@ export class LinkSearchCharactersService {
   searchTermName = '';
   searchTermStatus = '';
   searchTermGender = '';
+  searchTermSpecies = '';
+  searchTermType = '';
   characters: Character[];
 
 
@@ -24,7 +26,7 @@ export class LinkSearchCharactersService {
   */
 
   search() {
-    this.rickAndMortyService.searchCharacters(this.searchTermName, this.searchTermStatus, this.searchTermGender)
+    this.rickAndMortyService.searchCharacters(this.searchTermName, this.searchTermStatus, this.searchTermGender, this.searchTermSpecies, this.searchTermType)
       .subscribe(results => {
         this.characters = results.results;
       });
