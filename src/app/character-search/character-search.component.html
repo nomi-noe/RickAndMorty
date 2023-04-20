@@ -47,3 +47,11 @@
     <p>{{ charactersService.errorMessage }}</p>
   </div>
 </ul>
+<div class="pagination">
+  <button (click)="charactersService.previousPage()">Previous</button>
+  <button (click)="charactersService.searchPage(1)">1</button>
+  <button (click)="charactersService.searchPage(2)">2</button>
+  <button (click)="charactersService.searchPage(3)">3</button>
+  <!-- ... -->
+  <button (click)="charactersService.nextPage()">Next</button>
+</div>

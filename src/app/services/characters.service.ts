@@ -25,6 +25,7 @@ export class CharactersService {
     }
   */
 
+
   search() {
     this.rickAndMortyService.searchCharacters(this.searchTermCharacter)!
       .pipe(
@@ -44,5 +45,41 @@ export class CharactersService {
         }
       });
   }
+
+
+  currentPage = 1;
+
+  searchPage(page: number) {
+    this.rickAndMortyService.searchCharacters(this.searchTermCharacter, page)!
+      .pipe(
+        catchError(error => {
+          console.log('Erreur:', error);
+          this.errorMessage = 'Aucun résultat correspondant.';
+          this.characters = [];
+          return of();
+        })
+      )
+      .subscribe(results => {
+        this.characters = results.results;
+        if (this.characters.length === 0) {
+          console.log('Aucun Character trouvé.');
+        } else {
+          this.errorMessage = '';
+          this.currentPage = page;
+        }
+      });
+  }
+
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.searchPage(this.currentPage - 1);
+    }
+  }
+
+  nextPage() {
+    this.searchPage(this.currentPage + 1);
+  }
+
+
 
 }

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, forkJoin, map, of, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Character } from '../models/character';
 import { CharacterResult } from '../models/character-result';
 import { Episode } from '../models/episode';
@@ -29,11 +29,20 @@ export class RickAndMortyService {
     return this.http.get<Character>(url).pipe();
   }
 
-  searchCharacters(searchTermCharacter: SearchTermCharacter) {
+  /* searchCharacters(searchTermCharacter: SearchTermCharacter) {
+     if (!searchTermCharacter) {
+       return null;
+     }
+     return this.http.get<CharacterResult>(`${this.apiUrl}/character/?name=${searchTermCharacter.name ?? ''}&status=${searchTermCharacter.status ?? ''}&gender=${searchTermCharacter.gender ?? ''}&species=${searchTermCharacter.species ?? ''}&type=${searchTermCharacter.type ?? ''}`);
+   }
+   */
+
+  searchCharacters(searchTermCharacter: SearchTermCharacter, page: number = 1) {
     if (!searchTermCharacter) {
       return null;
     }
-    return this.http.get<CharacterResult>(`${this.apiUrl}/character/?name=${searchTermCharacter.name ?? ''}&status=${searchTermCharacter.status ?? ''}&gender=${searchTermCharacter.gender ?? ''}&species=${searchTermCharacter.species ?? ''}&type=${searchTermCharacter.type ?? ''}`);
+    const queryParams = `name=${searchTermCharacter.name ?? ''}&status=${searchTermCharacter.status ?? ''}&gender=${searchTermCharacter.gender ?? ''}&species=${searchTermCharacter.species ?? ''}&type=${searchTermCharacter.type ?? ''}`;
+    return this.http.get<CharacterResult>(`${this.apiUrl}/character/?${queryParams}&page=${page}`);
   }
 
 
@@ -53,29 +62,6 @@ export class RickAndMortyService {
     return this.http.get<EpisodeResult>(`${this.apiUrl}/episode/?name=${searchTermEpisode.name ?? ''}&episode=${searchTermEpisode.episode ?? ''}`);
   }
 
-  getAllCharacters(): Observable<any> {
-    const url = `${this.apiUrl}/character`;
-
-    return this.http.get<any>(url).pipe(
-      map((response) => response.info.pages),
-      switchMap((pages) => {
-        const pageNumbers = Array.from({ length: pages }, (_, i) => i + 1);
-        const characterRequests = pageNumbers.map((page) =>
-          this.http.get<any>(`${url}?page=${page}`).pipe(
-            map((response) => response.results)
-          )
-        );
-        return characterRequests.length
-          ? forkJoin(characterRequests).pipe(map((results) => [].concat(...results)))
-          : of([]);
-      })
-    );
-  }
-
-
-
-
-
   // searchCharacters(name: string): Observable<CharacterResult> {
   //   return this.http.get<CharacterResult>(`${this.apiUrl}/character/?name=${name}`);
   // }
@@ -83,7 +69,5 @@ export class RickAndMortyService {
   //  searchCharactersStatus(status: string): Observable<CharacterResult> {
   //   return this.http.get<CharacterResult>(`${this.apiUrl}/character/?status=${status}`)
   // }
-
-
 
 }

@@ -17,7 +17,7 @@ import { EpisodesComponent } from './episodes/episodes.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { RickAndMortyService } from './services/rick-and-morty.service';
-import { PaginationComponent } from './pagination/pagination.component';
+
 
 
 
@@ -33,8 +33,7 @@ import { PaginationComponent } from './pagination/pagination.component';
     EpisodesComponent,
     EpisodeDetailComponent,
     EpisodeListItemComponent,
-    EpisodeSearchComponent,
-    PaginationComponent
+    EpisodeSearchComponent
   ],
   imports: [
     BrowserModule,
