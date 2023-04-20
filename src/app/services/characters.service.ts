@@ -26,7 +26,7 @@ export class CharactersService {
   */
 
   search() {
-    this.rickAndMortyService.searchCharacters(this.searchTermCharacter)
+    this.rickAndMortyService.searchCharacters(this.searchTermCharacter)!
       .pipe(
         catchError(error => {
           console.log('Erreur:', error);

@@ -1,11 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin, map, of, switchMap } from 'rxjs';
 import { Character } from '../models/character';
 import { CharacterResult } from '../models/character-result';
 import { Episode } from '../models/episode';
 import { EpisodeResult } from '../models/episode-result';
 import { SearchTermCharacter } from '../models/search-term-character';
+import { SearchTermEpisode } from '../models/search-term-episode';
 
 @Injectable({ providedIn: 'root' })
 export class RickAndMortyService {
@@ -29,9 +30,9 @@ export class RickAndMortyService {
   }
 
   searchCharacters(searchTermCharacter: SearchTermCharacter) {
-    //  if (!searchTermCharacter) {
-    //    return null;
-    //  }
+    if (!searchTermCharacter) {
+      return null;
+    }
     return this.http.get<CharacterResult>(`${this.apiUrl}/character/?name=${searchTermCharacter.name ?? ''}&status=${searchTermCharacter.status ?? ''}&gender=${searchTermCharacter.gender ?? ''}&species=${searchTermCharacter.species ?? ''}&type=${searchTermCharacter.type ?? ''}`);
   }
 
@@ -45,9 +46,35 @@ export class RickAndMortyService {
     return this.http.get<Episode>(url).pipe();
   }
 
-  searchEpisodes(name: string, episode: string) {
-    return this.http.get<EpisodeResult>(`${this.apiUrl}/episode/?name=${name}&episode=${episode}`);
+  searchEpisodes(searchTermEpisode: SearchTermEpisode) {
+    if (!searchTermEpisode) {
+      return null;
+    }
+    return this.http.get<EpisodeResult>(`${this.apiUrl}/episode/?name=${searchTermEpisode.name ?? ''}&episode=${searchTermEpisode.episode ?? ''}`);
   }
+
+  getAllCharacters(): Observable<any> {
+    const url = `${this.apiUrl}/character`;
+
+    return this.http.get<any>(url).pipe(
+      map((response) => response.info.pages),
+      switchMap((pages) => {
+        const pageNumbers = Array.from({ length: pages }, (_, i) => i + 1);
+        const characterRequests = pageNumbers.map((page) =>
+          this.http.get<any>(`${url}?page=${page}`).pipe(
+            map((response) => response.results)
+          )
+        );
+        return characterRequests.length
+          ? forkJoin(characterRequests).pipe(map((results) => [].concat(...results)))
+          : of([]);
+      })
+    );
+  }
+
+
+
+
 
   // searchCharacters(name: string): Observable<CharacterResult> {
   //   return this.http.get<CharacterResult>(`${this.apiUrl}/character/?name=${name}`);

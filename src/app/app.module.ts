@@ -17,6 +17,9 @@ import { EpisodesComponent } from './episodes/episodes.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { RickAndMortyService } from './services/rick-and-morty.service';
+import { PaginationComponent } from './pagination/pagination.component';
+
+
 
 @NgModule({
   declarations: [
@@ -30,8 +33,8 @@ import { RickAndMortyService } from './services/rick-and-morty.service';
     EpisodesComponent,
     EpisodeDetailComponent,
     EpisodeListItemComponent,
-    EpisodeSearchComponent
-
+    EpisodeSearchComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,

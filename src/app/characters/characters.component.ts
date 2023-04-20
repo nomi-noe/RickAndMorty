@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Character } from '../models/character';
 import { CharactersService } from '../services/characters.service';
+import { RickAndMortyService } from '../services/rick-and-morty.service';
 
 @Component({
   selector: 'app-characters',
@@ -8,8 +10,9 @@ import { CharactersService } from '../services/characters.service';
 })
 export class CharactersComponent implements OnInit {
 
+  characters: Character[] = [];
 
-  constructor(public charactersService: CharactersService) { }
+  constructor(public charactersService: CharactersService, public rickAndMortyService: RickAndMortyService) { }
 
   ngOnInit(): void {
 
