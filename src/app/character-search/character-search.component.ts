@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LinkSearchCharactersService } from '../services/characters.service';
+import { CharactersService } from '../services/characters.service';
 import { RickAndMortyService } from '../services/rick-and-morty.service';
 
 @Component({
@@ -12,6 +12,7 @@ export class CharacterSearchComponent {
   listStatus = ['all', 'alive', 'dead', 'unknown']
   genders = ['female', 'male', 'genderless', 'unknown']
 
-  constructor(public linkSearchCharacterService: LinkSearchCharactersService, public rickAndMortyService: RickAndMortyService) { }
+
+  constructor(public charactersService: CharactersService, public rickAndMortyService: RickAndMortyService) { }
 
 }

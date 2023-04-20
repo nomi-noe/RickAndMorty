@@ -1,22 +1,20 @@
 import { Injectable } from '@angular/core';
 import { catchError, of } from 'rxjs';
 import { Character } from '../models/character';
+import { SearchTermCharacter } from '../models/search-Term-Character';
 import { RickAndMortyService } from './rick-and-morty.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LinkSearchCharactersService {
-  searchTermName = '';
-  searchTermStatus = '';
-  searchTermGender = '';
-  searchTermSpecies = '';
-  searchTermType = '';
+export class CharactersService {
+
+  searchTermCharacter: SearchTermCharacter = new SearchTermCharacter();
   characters: Character[];
   errorMessage: string;
 
 
-  constructor(private rickAndMortyService: RickAndMortyService) { }
+  constructor(private rickAndMortyService: RickAndMortyService) { console.log(this.searchTermCharacter) }
 
   /*  search() {
       this.rickAndMortyService.searchCharacters(this.searchTerm)
@@ -28,11 +26,12 @@ export class LinkSearchCharactersService {
   */
 
   search() {
-    this.rickAndMortyService.searchCharacters(this.searchTermName, this.searchTermStatus, this.searchTermGender, this.searchTermSpecies, this.searchTermType)
+    this.rickAndMortyService.searchCharacters(this.searchTermCharacter)
       .pipe(
         catchError(error => {
           console.log('Erreur:', error);
           this.errorMessage = 'Aucun résultat correspondant.';
+          this.characters = [];
           return of();
         })
       )

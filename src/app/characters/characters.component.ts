@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LinkSearchCharactersService } from '../services/characters.service';
+import { CharactersService } from '../services/characters.service';
 
 @Component({
   selector: 'app-characters',
@@ -9,7 +9,7 @@ import { LinkSearchCharactersService } from '../services/characters.service';
 export class CharactersComponent implements OnInit {
 
 
-  constructor(public linkSearchCharacterService: LinkSearchCharactersService) { }
+  constructor(public charactersService: CharactersService) { }
 
   ngOnInit(): void {
 

@@ -5,11 +5,10 @@ import { Character } from '../models/character';
 import { CharacterResult } from '../models/character-result';
 import { Episode } from '../models/episode';
 import { EpisodeResult } from '../models/episode-result';
-
+import { SearchTermCharacter } from '../models/search-term-character';
 
 @Injectable({ providedIn: 'root' })
 export class RickAndMortyService {
-
   private apiUrl = 'https://rickandmortyapi.com/api';
 
   httpOptions = {
@@ -29,8 +28,11 @@ export class RickAndMortyService {
     return this.http.get<Character>(url).pipe();
   }
 
-  searchCharacters(name: string, status: string, gender: string, species: string, type: string) {
-    return this.http.get<CharacterResult>(`${this.apiUrl}/character/?name=${name}&status=${status}&gender=${gender}&species=${species}&type=${type}`);
+  searchCharacters(searchTermCharacter: SearchTermCharacter) {
+    //  if (!searchTermCharacter) {
+    //    return null;
+    //  }
+    return this.http.get<CharacterResult>(`${this.apiUrl}/character/?name=${searchTermCharacter.name ?? ''}&status=${searchTermCharacter.status ?? ''}&gender=${searchTermCharacter.gender ?? ''}&species=${searchTermCharacter.species ?? ''}&type=${searchTermCharacter.type ?? ''}`);
   }
 
 
