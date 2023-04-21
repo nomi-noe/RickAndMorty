@@ -63,7 +63,7 @@ export class RickAndMortyService {
   }
 
   getCharacterByUrl(url: string) {
-    return this.http.get<Character>(`${url}`)
+    return this.http.get<Character>(url);
   }
 
 

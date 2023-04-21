@@ -12,6 +12,7 @@ import { RickAndMortyService } from '../services/rick-and-morty.service';
 export class CharacterDetailComponent implements OnInit {
   character: Character | undefined;
 
+
   constructor(
     private route: ActivatedRoute,
     private rickEtMortyService: RickAndMortyService,
