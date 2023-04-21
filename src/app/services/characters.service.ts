@@ -45,28 +45,7 @@ export class CharactersService {
     this.currentPage = pageNumber;
     this.search();
   }
-  // searchPage(page: number) {
-  //   this.rickAndMortyService.searchCharacters(this.searchTermCharacter, this.currentPage)
-  //     .pipe(
-  //       catchError(error => {
-  //         console.log('Erreur:', error);
-  //         this.errorMessage = 'Aucun résultat correspondant.';
-  //         this.characters = [];
-  //         return of();
-  //       })
-  //     )
-  //     .subscribe(results => {
-  //       this.characters = results.results;
-  //       if (this.characters.length === 0) {
-  //         console.log('Aucun Character trouvé.');
-  //       } else {
-  //         this.errorMessage = '';
-  //         this.currentPage = page;
-  //         this.totalPages = results.info.pages;
-  //         this.generatePageNumbers();
-  //       }
-  //     });
-  // }
+
   generatePageNumbers() {
     const aroundPagesNumber = 3;
     const startPage = Math.max(1, this.currentPage - aroundPagesNumber);

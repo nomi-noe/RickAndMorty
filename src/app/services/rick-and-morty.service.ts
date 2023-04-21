@@ -62,12 +62,9 @@ export class RickAndMortyService {
     return this.http.get<EpisodeResult>(`${this.apiUrl}/episode/?name=${searchTermEpisode.name ?? ''}&episode=${searchTermEpisode.episode ?? ''}`);
   }
 
-  // searchCharacters(name: string): Observable<CharacterResult> {
-  //   return this.http.get<CharacterResult>(`${this.apiUrl}/character/?name=${name}`);
-  // }
+  getCharacterByUrl(url: string) {
+    return this.http.get<Character>(`${url}`)
+  }
 
-  //  searchCharactersStatus(status: string): Observable<CharacterResult> {
-  //   return this.http.get<CharacterResult>(`${this.apiUrl}/character/?status=${status}`)
-  // }
 
 }
