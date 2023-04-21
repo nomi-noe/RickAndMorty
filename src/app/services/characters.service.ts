@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { catchError, of } from 'rxjs';
 import { Character } from '../models/character';
 import { SearchTermCharacter } from '../models/search-Term-Character';
@@ -7,7 +7,7 @@ import { RickAndMortyService } from './rick-and-morty.service';
 @Injectable({
   providedIn: 'root'
 })
-export class CharactersService implements OnInit {
+export class CharactersService {
 
   searchTermCharacter: SearchTermCharacter = new SearchTermCharacter();
   characters: Character[];
@@ -18,23 +18,11 @@ export class CharactersService implements OnInit {
   pageNumbers: number[] = [];
 
 
-  constructor(private rickAndMortyService: RickAndMortyService) { console.log(this.searchTermCharacter) }
+  constructor(private rickAndMortyService: RickAndMortyService) { }
 
-  /*  search() {
-      this.rickAndMortyService.searchCharacters(this.searchTerm)
-        .subscribe(results => {
-          this.characters = results.results;
-          
-        });
-    }
-  */
-  ngOnInit(): void {
-    const page = 3;
-    this.searchPage(page);
-  }
 
   search() {
-    this.rickAndMortyService.searchCharacters(this.searchTermCharacter)!
+    this.rickAndMortyService.searchCharacters(this.searchTermCharacter, this.currentPage)
       .pipe(
         catchError(error => {
           console.log('Erreur:', error);
@@ -49,33 +37,38 @@ export class CharactersService implements OnInit {
           console.log('Aucun Character trouvé.');
         } else {
           this.errorMessage = '';
-        }
-      });
-  }
-
-
-  searchPage(page: number) {
-    this.rickAndMortyService.searchCharacters(this.searchTermCharacter, page)!
-      .pipe(
-        catchError(error => {
-          console.log('Erreur:', error);
-          this.errorMessage = 'Aucun résultat correspondant.';
-          this.characters = [];
-          return of();
-        })
-      )
-      .subscribe(results => {
-        this.characters = results.results;
-        if (this.characters.length === 0) {
-          console.log('Aucun Character trouvé.');
-        } else {
-          this.errorMessage = '';
-          this.currentPage = page;
           this.totalPages = results.info.pages;
           this.generatePageNumbers();
         }
       });
   }
+
+  searchPage(pageNumber: number) {
+    this.currentPage = pageNumber;
+    this.search();
+  }
+  // searchPage(page: number) {
+  //   this.rickAndMortyService.searchCharacters(this.searchTermCharacter, this.currentPage)
+  //     .pipe(
+  //       catchError(error => {
+  //         console.log('Erreur:', error);
+  //         this.errorMessage = 'Aucun résultat correspondant.';
+  //         this.characters = [];
+  //         return of();
+  //       })
+  //     )
+  //     .subscribe(results => {
+  //       this.characters = results.results;
+  //       if (this.characters.length === 0) {
+  //         console.log('Aucun Character trouvé.');
+  //       } else {
+  //         this.errorMessage = '';
+  //         this.currentPage = page;
+  //         this.totalPages = results.info.pages;
+  //         this.generatePageNumbers();
+  //       }
+  //     });
+  // }
   generatePageNumbers() {
     const maxPages = 3;
     const startPage = Math.max(1, this.currentPage - maxPages);
@@ -85,14 +78,16 @@ export class CharactersService implements OnInit {
 
   previousPage() {
     if (this.currentPage > 1) {
-      this.searchPage(this.currentPage - 1);
+      this.currentPage = this.currentPage - 1;
+      this.search();
     }
   }
 
   nextPage() {
-    this.searchPage(this.currentPage + 1);
+    if (this.currentPage < this.totalPages) {
+      this.currentPage = this.currentPage + 1;
+      this.search();
+    }
   }
-
-
 
 }

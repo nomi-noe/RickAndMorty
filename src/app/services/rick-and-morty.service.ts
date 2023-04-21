@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Character } from '../models/character';
 import { CharacterResult } from '../models/character-result';
 import { Episode } from '../models/episode';
@@ -39,7 +39,7 @@ export class RickAndMortyService {
 
   searchCharacters(searchTermCharacter: SearchTermCharacter, page: number = 1) {
     if (!searchTermCharacter) {
-      return null;
+      return of();
     }
     const queryParams = `name=${searchTermCharacter.name ?? ''}&status=${searchTermCharacter.status ?? ''}&gender=${searchTermCharacter.gender ?? ''}&species=${searchTermCharacter.species ?? ''}&type=${searchTermCharacter.type ?? ''}`;
     return this.http.get<CharacterResult>(`${this.apiUrl}/character/?${queryParams}&page=${page}`);

@@ -48,11 +48,6 @@
   </div>
 </ul>
 <div class="pagination">
-
-  <button (click)="charactersService.searchPage(1)">1</button>
-
-</div>
-<div class="pagination">
   <button (click)="charactersService.previousPage()" [disabled]="charactersService.currentPage === 1">Previous</button>
   <button *ngFor="let pageNumber of charactersService.pageNumbers" (click)="charactersService.searchPage(pageNumber)"
     [class.active]="pageNumber === charactersService.currentPage">{{ pageNumber }}</button>
