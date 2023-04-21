@@ -1,5 +1,6 @@
 <h2>Characters</h2>
 <app-character-search></app-character-search>
+<app-character-pagination></app-character-pagination>
 <ul class="list-group">
   <li class="list-group-item mb-1" *ngFor="let character of charactersService.characters"
     [routerLink]="['/character', character.id]">

@@ -33,9 +33,7 @@ export class CharactersService {
       )
       .subscribe(results => {
         this.characters = results.results;
-        if (this.characters.length === 0) {
-          console.log('Aucun Character trouvé.');
-        } else {
+        if (this.characters.length != 0) {
           this.errorMessage = '';
           this.totalPages = results.info.pages;
           this.generatePageNumbers();
