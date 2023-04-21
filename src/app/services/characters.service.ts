@@ -68,9 +68,9 @@ export class CharactersService {
   //     });
   // }
   generatePageNumbers() {
-    const maxPages = 3;
-    const startPage = Math.max(1, this.currentPage - maxPages);
-    const endPage = Math.min(this.totalPages, this.currentPage + maxPages);
+    const aroundPagesNumber = 3;
+    const startPage = Math.max(1, this.currentPage - aroundPagesNumber);
+    const endPage = Math.min(this.totalPages, this.currentPage + aroundPagesNumber);
     this.pageNumbers = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
   }
 
